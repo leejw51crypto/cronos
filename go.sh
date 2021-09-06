@@ -1,0 +1,1 @@
+nix-shell ./my.nix
