@@ -11,6 +11,6 @@ pkgs.mkShell {
     pkgs.nodejs
     pkgs.git
     (import ../nix/testenv.nix { inherit pkgs; })
-    (import ../chainmain.nix { inherit pkgs; })
+    (import ../my.nix { inherit pkgs; })
   ];
 }
