@@ -1,0 +1,122 @@
+cronos_777-1:
+  cmd: cronosd
+  start-flags: "--trace"
+  app-config:
+    json-rpc:
+      address: "0.0.0.0:{EVMRPC_PORT}"
+      ws-address: "0.0.0.0:{EVMRPC_PORT_WS}"
+  validators:
+    - coins: 1000000000000000000stake,1000000000000000000basetcro
+      staked: 1000000000000000000stake
+      mnemonic: visit craft resemble online window solution west chuckle music diesel vital settle comic tribe project blame bulb armed flower region sausage mercy arrive release
+    - coins: 1000000000000000000stake,1000000000000000000basetcro
+      staked: 1000000000000000000stake
+      mnemonic: direct travel shrug hand twice agent sail sell jump phone velvet pilot mango charge usual multiply orient garment bleak virtual action mention panda vast
+  accounts:
+    - name: community
+      coins: 10000000000000000000000basetcro
+      mnemonic: "notable error gospel wave pair ugly measure elite toddler cost various fly make eye ketchup despair slab throw tribe swarm word fruit into inmate"
+    - name: signer1
+      coins: 20000000000000000000000basetcro
+      mnemonic: shed crumble dismiss loyal latin million oblige gesture shrug still oxygen custom remove ribbon disorder palace addict again blanket sad flock consider obey popular
+    - name: signer2
+      coins: 30000000000000000000000basetcro
+      mnemonic: night renew tonight dinner shaft scheme domain oppose echo summer broccoli agent face guitar surface belt veteran siren poem alcohol menu custom crunch index
+  
+  genesis:
+    app_state:
+      evm:
+        params:
+          evm_denom: basetcro
+      staking:
+        params:
+          unbonding_time: "1814400s"
+      gov:
+        voting_params:
+          voting_period: "1814400s"
+        deposit_params:
+          max_deposit_period: "1814400s"
+          min_deposit:
+            - denom: "basetcro"
+              amount: "10000000"
+      transfer:
+        params:
+          receive_enabled: true
+          send_enabled: true
+      capability:
+        index: '3'
+        owners:
+        - index: '1'
+          index_owners:
+            owners:
+            - module: ibc
+              name: ports/transfer
+            - module: transfer
+              name: ports/transfer
+        - index: '2'
+          index_owners:
+            owners:
+            - module: ibc
+              name: capabilities/ports/transfer/channels/channel-0
+            - module: transfer
+              name: capabilities/ports/transfer/channels/channel-0
+      ibc:
+        channel_genesis:
+          ack_sequences:
+          - channel_id: channel-0
+            port_id: transfer
+            sequence: '1'
+          acknowledgements:
+          - channel_id: channel-0
+            data: CPdVftUYJv4Y2EUSvyTsdQAe268hI6R333KgqfNkCnw=
+            port_id: transfer
+            sequence: '1'
+          channels:
+          - channel_id: channel-0
+            connection_hops:
+            - connection-0
+            counterparty:
+              channel_id: channel-0
+              port_id: transfer
+            ordering: ORDER_UNORDERED
+            port_id: transfer
+            state: STATE_OPEN
+            version: ics20-1
+          commitments: []
+          next_channel_sequence: '1'
+          receipts:
+          - channel_id: channel-0
+            data: AQ==
+            port_id: transfer
+            sequence: '1'
+          recv_sequences:
+          - channel_id: channel-0
+            port_id: transfer
+            sequence: '1'
+          send_sequences:
+          - channel_id: channel-0
+            port_id: transfer
+            sequence: '1'
+        connection_genesis:
+          client_connection_paths:
+          - client_id: 07-tendermint-0
+            paths:
+            - connection-0
+          connections:
+          - client_id: 07-tendermint-0
+            counterparty:
+              client_id: 07-tendermint-0
+              connection_id: connection-0
+              prefix:
+                key_prefix: aWJj
+            delay_period: '0'
+            id: connection-0
+            state: STATE_OPEN
+            versions:
+            - features:
+              - ORDER_ORDERED
+              - ORDER_UNORDERED
+              identifier: '1'
+          next_connection_sequence: '1'
+          params:
+            max_expected_time_per_block: '30000000000'
