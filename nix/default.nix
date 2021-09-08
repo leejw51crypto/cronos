@@ -15,6 +15,7 @@ import sources.nixpkgs {
       import ./scripts.nix {
         inherit pkgs;
         config = {
+          chainmain-config = ../scripts/chainmain-devnet.yaml;
           cronos-config = ../scripts/cronos-devnet.yaml;
           geth-genesis = ../scripts/geth-genesis.json;
         };

@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from .network import setup_cronos, setup_geth
+from .network import setup_cronos, setup_geth, setup_chainmain
 
 
 def pytest_configure(config):
