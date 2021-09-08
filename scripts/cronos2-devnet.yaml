@@ -22,21 +22,28 @@ cronos_777-1:
     - name: signer2
       coins: 30000000000000000000000basetcro
       mnemonic: night renew tonight dinner shaft scheme domain oppose echo summer broccoli agent face guitar surface belt veteran siren poem alcohol menu custom crunch index
+    
   
   genesis:
     app_state:
       evm:
         params:
           evm_denom: basetcro
-      cronos:
+      staking:
         params:
-          cronos_admin: crc12luku6uxehhak02py4rcz65zu0swh7wjsrw0pp
-          enable_auto_deployment: true
+          unbonding_time: "1814400s"
       gov:
         voting_params:
-          voting_period: "10s"
+          voting_period: "1814400s"
         deposit_params:
-          max_deposit_period: "10s"
+          max_deposit_period: "1814400s"
           min_deposit:
             - denom: "basetcro"
-              amount: "1"
+              amount: "10000000"
+      transfer:
+        params:
+          receive_enabled: true
+          send_enabled: true
+      cronos:
+        params:
+          ibc_cro_denom: ibc/6411AE2ADA1E73DB59DB151A8988F9B7D5E7E233D8414DB6817F8F1A01611F86
