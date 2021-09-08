@@ -15,5 +15,7 @@ pkgs.mkShell {
     pkgs.dapp
     pkgs.solc-static-versions.solc_0_6_11
     (import ../nix/testenv.nix { inherit pkgs; })
+    (import ../nix/chainmain.nix { inherit pkgs; })
+    (import ../nix/hermes.nix { inherit pkgs; })
   ];
 }

@@ -2,7 +2,8 @@ import json
 import os
 import signal
 import subprocess
-
+import tomlkit
+import time
 import web3
 from pystarport import ports
 from web3.middleware import geth_poa_middleware
@@ -35,13 +36,51 @@ class Cronos:
     def cosmos_cli(self, i=0):
         return CosmosCLI(self.base_dir / f"node{i}", self.node_rpc(i), "cronosd")
 
+class Chainmain:
+    def __init__(self, base_dir):
+        self.base_dir = base_dir
+        self.config = json.load(open(base_dir / "config.json"))
+
+    def base_port(self, i):
+        return self.config["validators"][i]["base_port"]
+
+    def node_rpc(self, i):
+        return "tcp://127.0.0.1:%d" % ports.rpc_port(self.base_port(i))
+
+    def cosmos_cli(self, i=0):
+        return CosmosCLI(self.base_dir / f"node{i}", self.node_rpc(i), "chain-maind")
+ 
+
+class Hermes:
+    def __init__(self, base_dir):
+        self.base_dir = base_dir
+        print(f'hermes init base_dir {base_dir}')  
+        configpath= base_dir / "config.toml"
+        with open(configpath) as f:
+            a=f.read()
+            b=tomlkit.loads(a)                     
+        self.config = b
+        self.configpath = configpath        
+        print(f'hermes config path={self.configpath}')
+        print(json.dumps(self.config, indent=4))
+        
+
+    def base_port(self, i):
+        return self.config["validators"][i]["base_port"]
+
+    def node_rpc(self, i):
+        return "tcp://127.0.0.1:%d" % ports.rpc_port(self.base_port(i))
+
+    def cosmos_cli(self, i=0):
+        return CosmosCLI(self.base_dir / f"node{i}", self.node_rpc(i), "cronosd")
+
 
 class Geth:
     def __init__(self, w3):
         self.w3 = w3
 
 
-def setup_cronos(path, base_port):
+def setup_cronos2(path, base_port):
     cmd = ["start-cronos", path, "--base_port", str(base_port)]
     print(*cmd)
     proc = subprocess.Popen(
@@ -56,6 +95,55 @@ def setup_cronos(path, base_port):
         # proc.terminate()
         proc.wait()
 
+def setup_cronos(path, base_port):
+    print(f"setup cronos path= {path}")
+    cmd = ["start-cronos", path, "--base_port", str(base_port)]
+    print(*cmd)
+    proc = subprocess.Popen(
+        cmd,
+        preexec_fn=os.setsid,
+    )
+    try:
+        wait_for_port(ports.evmrpc_port(ports.evmrpc_port(base_port)))
+        yield Cronos(path / "cronos_777-1")
+    finally:
+        os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+        # proc.terminate()
+        proc.wait()
+
+
+def setup_chainmain(path, base_port):
+    print(f"setup chainmain path= {path}")
+    cmd = ["start-chainmain", path, "--base_port", str(base_port)]
+    print(*cmd)
+    proc = subprocess.Popen(
+        cmd,
+        preexec_fn=os.setsid,
+    )
+    try:
+        wait_for_port(base_port)
+        yield Chainmain(path / "chainmain-1")
+    finally:
+        os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+        # proc.terminate()
+        proc.wait()
+
+def setup_hermes(path, base_port):
+    print(f"setup hermes path= {path}")
+    cmd = ["start-hermes", path, "--base_port", str(base_port)]
+    print(*cmd)
+    proc = subprocess.Popen(
+        cmd,
+        preexec_fn=os.setsid,
+    )
+    try:
+        #wait_for_port(base_port)      
+        time.sleep(4)  
+        yield Hermes(path)
+    finally:
+        os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+        # proc.terminate()
+        proc.wait()        
 
 def setup_geth(path, base_port):
     with (path / "geth.log").open("w") as logfile:
