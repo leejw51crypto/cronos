@@ -28,3 +28,18 @@ cronos_777-1:
       evm:
         params:
           evm_denom: basetcro
+      staking:
+        params:
+          unbonding_time: "1814400s"
+      gov:
+        voting_params:
+          voting_period: "1814400s"
+        deposit_params:
+          max_deposit_period: "1814400s"
+          min_deposit:
+            - denom: "basetcro"
+              amount: "10000000"
+      transfer:
+        params:
+          receive_enabled: true
+          send_enabled: true

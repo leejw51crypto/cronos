@@ -17,6 +17,8 @@ import sources.nixpkgs {
         config = {
           chainmain-config = ../scripts/chainmain-devnet.yaml;
           cronos-config = ../scripts/cronos-devnet.yaml;
+          cronos2-config = ../scripts/cronos2-devnet.yaml;
+          hermes-config = ../scripts/hermes.toml;
           geth-genesis = ../scripts/geth-genesis.json;
         };
       }
