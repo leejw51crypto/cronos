@@ -61,8 +61,9 @@ class Hermes:
             b=tomlkit.loads(a)                     
         self.config = b
         self.configpath = configpath        
+        print(f'hermes config path={self.configpath}')
         print(json.dumps(self.config, indent=4))
-        print(f'config path={self.configpath}')
+        
 
     def base_port(self, i):
         return self.config["validators"][i]["base_port"]
@@ -95,6 +96,7 @@ def setup_cronos2(path, base_port):
         proc.wait()
 
 def setup_cronos(path, base_port):
+    print(f"setup cronos path= {path}")
     cmd = ["start-cronos", path, "--base_port", str(base_port)]
     print(*cmd)
     proc = subprocess.Popen(
@@ -111,6 +113,7 @@ def setup_cronos(path, base_port):
 
 
 def setup_chainmain(path, base_port):
+    print(f"setup chainmain path= {path}")
     cmd = ["start-chainmain", path, "--base_port", str(base_port)]
     print(*cmd)
     proc = subprocess.Popen(
@@ -126,11 +129,8 @@ def setup_chainmain(path, base_port):
         proc.wait()
 
 def setup_hermes(path, base_port):
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")    
     print(f"setup hermes path= {path}")
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     cmd = ["start-hermes", path, "--base_port", str(base_port)]
-    print("run command")
     print(*cmd)
     proc = subprocess.Popen(
         cmd,

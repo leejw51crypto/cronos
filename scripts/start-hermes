@@ -16,18 +16,14 @@ if [ -z "$DATA" ]; then
 fi
 shift
 
-echo '###############################################################'
-echo '###############################################################'
 echo 'start-hermes'
 echo 'config= '$CONFIG
 echo 'data= '$DATA
 echo 'current folder= ' $PWD
-echo '###############################################################'
-echo '###############################################################'
 
 NEWCONFIG=$DATA/config.toml
-echo "src= "$CONFIG
-echo "dst= "$NEWCONFIG
+echo "hermes src config= "$CONFIG
+echo "hermes dst config= "$NEWCONFIG
 cp $CONFIG $NEWCONFIG
 
 hermes -c $NEWCONFIG  keys restore chainmain-1 -m "shed crumble dismiss loyal latin million oblige gesture shrug still oxygen custom remove ribbon disorder palace addict again blanket sad flock consider obey popular"  -p "m/44'/394'/0'/0/0"
@@ -39,6 +35,3 @@ hermes  -c $NEWCONFIG keys list cronos_777-1
 hermes -c $NEWCONFIG create channel chainmain-1 cronos_777-1 --port-a transfer --port-b transfer
 hermes -c $NEWCONFIG  start
 
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "OK"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
