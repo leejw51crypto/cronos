@@ -52,7 +52,8 @@ def test_ibc(cronos,chainmain, hermes) :
         MYCHANNEL="channel-0"
         MYCONFIG=hermes.configpath
         RECEIVER="ethm1q04jewhxw4xxu3vlg3rc85240h9q7ns6mctk75"
-        SRCAMOUNT=2000000000
+        #SRCAMOUNT=2000000000
+        SRCAMOUNT=9000001111100000111
         SRCDENOM="basecro"
         DSTDENOM="ibc/6411AE2ADA1E73DB59DB151A8988F9B7D5E7E233D8414DB6817F8F1A01611F86"
         # dstchainid srcchainid srcportid srchannelid
