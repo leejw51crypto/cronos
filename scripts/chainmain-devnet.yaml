@@ -35,21 +35,4 @@ chainmain-1:
       transfer:
         params:
           receive_enabled: true
-          send_enabled: true
-      capability:
-        index: '3'
-        owners:
-        - index: '1'
-          index_owners:
-            owners:
-            - module: ibc
-              name: ports/transfer
-            - module: transfer
-              name: ports/transfer
-        - index: '2'
-          index_owners:
-            owners:
-            - module: ibc
-              name: capabilities/ports/transfer/channels/channel-0
-            - module: transfer
-              name: capabilities/ports/transfer/channels/channel-0
+          send_enabled: true      
