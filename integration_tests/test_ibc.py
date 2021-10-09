@@ -49,7 +49,7 @@ def getBalance(chain, addr, denom):
     return 0
 
 
-def my_ibc(cronos, chainmain, hermes):
+def my_test(cronos, chainmain, hermes):
     print("test ibc")
     time.sleep(2000000000)
     assert True
@@ -124,7 +124,7 @@ def test_ibc_reverse(cronos, chainmain, hermes):
     pass
 
 
-def my_contract(cronos, chainmain, hermes):
+def test_contract(cronos, chainmain, hermes):
     CRONOS_NODE = 'http://127.0.0.1:26701'
     CRONOS_CHAINID = 777
     CRONOS_GAS = 3000000000
