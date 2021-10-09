@@ -17,7 +17,7 @@ chainmain-1:
       coins: 10000000000000cro
       mnemonic: shed crumble dismiss loyal latin million oblige gesture shrug still oxygen custom remove ribbon disorder palace addict again blanket sad flock consider obey popular
     - name: signer2
-      coins: 20000000000000cro   
+      coins: 0cro   
       mnemonic: night renew tonight dinner shaft scheme domain oppose echo summer broccoli agent face guitar surface belt veteran siren poem alcohol menu custom crunch index
   genesis:
     app_state:

@@ -90,6 +90,40 @@ def test_ibc(cronos, chainmain, hermes):
     pass
 
 
+def test_ibc_reverse(cronos, chainmain, hermes):
+    # wait for hermes
+    time.sleep(20)
+    while True:
+        print(f"test ibc config={hermes.configpath}")
+        MYIBC0 = "chainmain-1"
+        MYIBC1 = "cronos_777-1"
+        MYCHANNEL = "channel-0"
+        MYCONFIG = hermes.configpath
+        # signer21
+        RECEIVER = "cro1u08u5dvtnpmlpdq333uj9tcj75yceggszxpnsy"
+        SRCAMOUNT = 2*(10**10)
+        SRCDENOM = "basetcro"
+        DSTDENOM = "ibc/6B5A664BF0AF4F71B2F0BAA33141E2F1321242FBD5D19762F541EC971ACB0865"
+        # dstchainid srcchainid srcportid srchannelid
+        # chainmain-1 <- cronos_777-1
+        cmd = f'hermes -c {MYCONFIG} tx raw ft-transfer {MYIBC0} {MYIBC1} transfer {MYCHANNEL} {SRCAMOUNT} -o 1000 -n 1 -d {SRCDENOM} -r {RECEIVER} -k testkey'
+        print(f'hermes config= {MYCONFIG}')
+        stream = os.popen(cmd)
+        output = stream.read()
+        print(output)
+        dstaddr = f"{RECEIVER}"
+        olddstbalance = getBalance(chainmain, dstaddr, DSTDENOM)
+        print(f"old balance={olddstbalance} denom={DSTDENOM}")
+        time.sleep(5)
+        newdstbalance = getBalance(chainmain, dstaddr, DSTDENOM)
+        print(f"new balance={newdstbalance} denom={DSTDENOM}")
+        expectedbalance = olddstbalance + SRCAMOUNT
+        assert expectedbalance == newdstbalance
+        break
+    assert True
+    pass
+
+
 def my_contract(cronos, chainmain, hermes):
     CRONOS_NODE = 'http://127.0.0.1:26701'
     CRONOS_CHAINID = 777
