@@ -32,9 +32,9 @@ hermes -c $NEWCONFIG  keys restore cronos_777-1 -m "shed crumble dismiss loyal l
 hermes  -c $NEWCONFIG keys list chainmain-1
 hermes  -c $NEWCONFIG keys list cronos_777-1
 
-#hermes -c $NEWCONFIG create channel chainmain-1 cronos_777-1 --port-a transfer --port-b transfer
+hermes -c $NEWCONFIG create channel chainmain-1 cronos_777-1 --port-a transfer --port-b transfer
 #chanel, connection already inside genesis
-hermes -c $NEWCONFIG tx raw create-client chainmain-1 cronos_777-1
-hermes -c $NEWCONFIG tx raw create-client cronos_777-1 chainmain-1
+#hermes -c $NEWCONFIG tx raw create-client chainmain-1 cronos_777-1
+#hermes -c $NEWCONFIG tx raw create-client cronos_777-1 chainmain-1
 hermes -c $NEWCONFIG  start
 

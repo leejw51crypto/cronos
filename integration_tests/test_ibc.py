@@ -49,7 +49,7 @@ def getBalance(chain, addr, denom):
     return 0
 
 
-def test_ibc(cronos, chainmain):
+def test_ibc(cronos, chainmain, hermes):
     print("test ibc")
     time.sleep(2000000000)
     assert True
