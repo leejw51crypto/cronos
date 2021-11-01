@@ -15,12 +15,12 @@ cronos_777-1:
       mnemonic: direct travel shrug hand twice agent sail sell jump phone velvet pilot mango charge usual multiply orient garment bleak virtual action mention panda vast
   accounts:
     - name: community
-      coins: 1000000000000000000000000000000basetcro
+      coins: 10000000000000000000000000000000000basetcro
     - name: mykey
-      coins: 1000000000000000000000000000000basetcro      
+      coins: 10000000000000000000000000000000000basetcro      
       mnemonic: "notable error gospel wave pair ugly measure elite toddler cost various fly make eye ketchup despair slab throw tribe swarm word fruit into inmate"
     - name: signer1
-      coins: 200000000000000000000000000000basetcro
+      coins: 2000000000000000000000000000000000basetcro
       mnemonic: shed crumble dismiss loyal latin million oblige gesture shrug still oxygen custom remove ribbon disorder palace addict again blanket sad flock consider obey popular
     - name: signer2
       coins: 300000000000000000000000000000basetcro
