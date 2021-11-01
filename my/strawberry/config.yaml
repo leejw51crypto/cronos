@@ -16,6 +16,8 @@ cronos_777-1:
   accounts:
     - name: community
       coins: 10000000000000000000000basetcro
+    - name: mykey
+      coins: 10000000000000000000000basetcro      
       mnemonic: "notable error gospel wave pair ugly measure elite toddler cost various fly make eye ketchup despair slab throw tribe swarm word fruit into inmate"
     - name: signer1
       coins: 20000000000000000000000basetcro
