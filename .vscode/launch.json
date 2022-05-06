@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${fileDirname}",
+            "args": ["start","--pruning=nothing","--minimum-gas-prices","0.0001aapple"," --json-rpc.api=eth,txpool,personal,net,debug,web3,miner", "--home","${userHome}/.applemint_1-2"]
+        }
+    ]
+}
