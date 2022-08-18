@@ -5,4 +5,4 @@ export TO=$S2
 
 export AMOUNT=2100000000000000001$DENOM
 echo "send amount $AMOUNT"
-$CLI tx bank  send $FROM $TO $AMOUNT --chain-id $CHAINID --keyring-backend $KEYRING   --gas-prices 100$DENOM --home $CHAINHOME --node $NODE
+$CLI tx bank  send $FROM $TO $AMOUNT --chain-id $CHAINID --keyring-backend $KEYRING   --gas-prices 1000000$DENOM --home $CHAINHOME --node $NODE
