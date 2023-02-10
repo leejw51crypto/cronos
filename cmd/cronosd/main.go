@@ -1,5 +1,11 @@
 package main
 
+/*
+#cgo CXXFLAGS: -std=c++11
+#cgo LDFLAGS: -lrocks -L/mingw64/lib
+*/
+import "C"
+
 import (
 	"os"
 
