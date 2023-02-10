@@ -219,6 +219,8 @@ test-sim-profile:
 ###                                Integration Test                         ###
 ###############################################################################
 
+get_chainmain:
+	git clone git@github.com:crypto-org-chain/chain-main.git ./integration_tests/chain-main 
 run-integration-tests:
 	@make gen-bindings-contracts
 	@nix-shell ./integration_tests/shell.nix --run ./scripts/run-integration-tests

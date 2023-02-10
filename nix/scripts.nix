@@ -1,7 +1,11 @@
-{ pkgs
-, config
-, cronos ? (import ../. { inherit pkgs; })
+{ pkgs, config, cronos ? (import ../. { inherit pkgs; })
+, chainmain ? (import ../nix/chainmain.nix { inherit pkgs; })
+
 }: rec {
+  start-chainmain = pkgs.writeShellScriptBin "start-chainmain" ''
+    export PATH=${pkgs.pystarport}/bin:${chainmain}/bin:$PATH
+    ${../scripts/start-chainmain} ${config.chainmain-config} $@
+  '';
   start-cronos = pkgs.writeShellScriptBin "start-cronos" ''
     # rely on environment to provide cronosd
     export PATH=${pkgs.test-env}/bin:$PATH
@@ -14,6 +18,6 @@
   '';
   start-scripts = pkgs.symlinkJoin {
     name = "start-scripts";
-    paths = [ start-cronos start-geth ];
+    paths = [ start-cronos start-geth start-chainmain ];
   };
 }

@@ -88,6 +88,20 @@ class Hermes:
         self.config = tomlkit.loads(config.read_text())
         self.port = 3000
 
+class Chainmain:
+    def __init__(self, base_dir):
+        self.base_dir = base_dir
+        self.config = json.load(open(base_dir / "config.json"))
+
+    def base_port(self, i):
+        return self.config["validators"][i]["base_port"]
+
+    def node_rpc(self, i):
+        return "tcp://127.0.0.1:%d" % ports.rpc_port(self.base_port(i))
+
+    def cosmos_cli(self, i=0):
+        return CosmosCLI(self.base_dir / f"node{i}", self.node_rpc(i), "cronosd")
+ 
 
 class Geth:
     def __init__(self, w3):
@@ -102,6 +116,23 @@ def setup_cronos(path, base_port, enable_auto_deployment=True):
     )
     yield from setup_custom_cronos(path, base_port, cfg)
 
+
+def setup_chainmain(path, base_port):
+    print(f'setup_chainmain path {path} base_port {base_port}')
+    cmd = ["start-chainmain", path, "--base_port", str(base_port)]
+    print(*cmd)
+    proc = subprocess.Popen(
+        cmd,
+        preexec_fn=os.setsid,
+    )
+    try:
+        wait_for_port(base_port)
+        yield Chainmain(path / "chainmain-1")
+    finally:
+        os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+        # proc.terminate()
+        proc.wait()
+        
 
 def setup_geth(path, base_port):
     with (path / "geth.log").open("w") as logfile:

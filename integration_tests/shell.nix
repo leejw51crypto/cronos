@@ -20,10 +20,8 @@ pkgs.mkShell {
     (renameExe pkgs.solc-static-versions.solc_0_8_21 "solc-0.8.21" "solc08")
     pkgs.test-env
     pkgs.nixpkgs-fmt
-    pkgs.rocksdb
-    pkgs.chain-maind
-    pkgs.hermes
-    pkgs.rly
+    (import ../nix/testenv.nix { inherit pkgs; })
+    (import ../nix/chainmain.nix { inherit pkgs; })
   ];
   shellHook = ''
     mkdir ./coverage
